@@ -39,11 +39,18 @@ int main(int argc, char *argv[])
 
 	stepper /= 10;
 
-	thenumber1[0] = number1 / stepper;
+	if(number1 >= divisor1)
+  	{
+		thenumber1[0] = number1 / stepper;
 
-	for(int i = counter - 1, j = 1; i > 0; i--, j *= 10)
+		for(int i = counter - 1, j = 1; i > 0; i--, j *= 10)
+		{
+			thenumber1[i] = number1 / j % 10;
+		}
+	}
+	else
 	{
-		thenumber1[i] = number1 / j % 10;
+		thenumber1[0] = atoi(argv[1]);
 	}
 	
 	initscr();
@@ -73,7 +80,7 @@ int main(int argc, char *argv[])
 		buffernumber1 = thenumber1[index1];
 		index1++;
 	}
-	else if(number1 > divisor1)
+	else if(number1 >= divisor1)
 	{
 		buffernumber1 = thenumber1[index1] * 10;
 		index1++;
@@ -93,11 +100,34 @@ int main(int argc, char *argv[])
 	while(index1 <= counter)
 	{
 		thequotient1 = buffernumber1 / divisor1;
-		mvprintw(0, data1size+3+index1-1, "%d", thequotient1);
+		if(number1 >= divisor1)
+		{
+			mvprintw(0, data1size+3+index1-1, "%d", thequotient1);
+		}
+		else
+		{
+			mvprintw(0, data1size+2+data2size, "%d", thequotient1);
+		}
 		bufferanswer1++;
 		theproduct1 = thequotient1 * divisor1;
 		theanswer1 = buffernumber1 - theproduct1;
-		mvprintw(y, data1size+2+index1-1, "%2d", theproduct1);
+		if(number1 >= divisor1)
+		{
+		if(thenumber1[index1] != -1)
+		{
+			if(theproduct1 < 100)
+			{
+				mvprintw(y, data1size+2+index1-1, "%2d", theproduct1);
+			}
+			else
+			{
+				mvprintw(y, data1size+2+index1-2, "%2d", theproduct1);
+			}
+		}
+		else
+		{
+			mvprintw(y, data1size+2+index1-1, "%2d", theproduct1);
+		}
 		mvprintw(y, data1size+1, "%c", '-');
 		y++;
 		for(int i = 0; i <= data2size; i++)
@@ -116,6 +146,20 @@ int main(int argc, char *argv[])
 		y++;
 		buffernumber1 = theanswer1 * 10 + thenumber1[index1];
 		index1++;
+		}
+		else
+		{
+			mvprintw(y, data1size+2+data2size, "%d", theproduct1);
+			mvprintw(y, data1size+1, "%c", '-');
+			y++;
+			for(int i = 0; i <= data2size; i++)
+			{
+				mvprintw(y, data1size+2+i, "%c", '-');
+			}
+			y++;
+			mvprintw(y, data1size+3, "%d", theanswer1);
+			break;
+		}
 	}
 	
 	refresh();
