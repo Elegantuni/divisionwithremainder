@@ -39,10 +39,6 @@ int main(int argc, char *argv[])
 
 	stepper /= 10;
 
-	cout << "The counter is " << counter << endl;
-
-	cout << "The stepper is " << stepper << endl;
-	
 	thenumber1[0] = number1 / stepper;
 
 	for(int i = counter - 1, j = 1; i > 0; i--, j *= 10)
@@ -77,12 +73,21 @@ int main(int argc, char *argv[])
 		buffernumber1 = thenumber1[index1];
 		index1++;
 	}
-	else
+	else if(number1 > divisor1)
 	{
 		buffernumber1 = thenumber1[index1] * 10;
 		index1++;
 		buffernumber1 += thenumber1[index1];
 		index1++;
+	}
+	else
+	{
+		buffernumber1 = thenumber1[index1];
+
+		if(thenumber1[index1] <= counter)
+		{
+			index1++;
+		}
 	}
 	
 	while(index1 <= counter)
