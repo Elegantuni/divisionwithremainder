@@ -40,6 +40,13 @@ int main(int argc, char *argv[])
 		return 1;
 	}
 
+	if(divisor1 == 0)
+	{
+		cout << "divisor must not be 0" << endl;
+
+		return 1;
+	}
+
 	for(int i = 0; i < maxlength; i++)
 	{
 		thenumber1[i] = -1;
@@ -68,118 +75,201 @@ int main(int argc, char *argv[])
 	}
 	
 	initscr();
+	noecho();
+	cbreak();
 
 	int x = 0;
 	int y = 2;
 	int ansx = 5;
 	int ansy = 0;
+	int cordx = 0;
+	int cordy = 0;
+	int width = 80;
+	int height = 50;
 
-	for(int i = 0; i <= data2size; i++)
+	resizeterm(height, width);
+
+	while((ch = getch()) != 'q')
 	{
-		mvprintw(1, data1size + 2 + i, "%c", '_');
-	}
+		clear();
+		x = 0;
+		y = 2;
 	
-	mvprintw(y, x, "%d | %d", divisor1, number1);
-
-	y++;
-
-	int index1 = 0;
-	int bufferanswer1 = data1size + 3;
-	int theproduct1;
-	int thequotient1;
-	int theanswer1;
-
-	if(divisor1 <= thenumber1[index1])
-	{
-		buffernumber1 = thenumber1[index1];
-		index1++;
-	}
-	else if(number1 >= divisor1)
-	{
-		buffernumber1 = thenumber1[index1] * 10;
-		index1++;
-		buffernumber1 += thenumber1[index1];
-		index1++;
-	}
-	else
-	{
-		buffernumber1 = thenumber1[index1];
-
-		if(thenumber1[index1] <= counter)
+		for(int i = 0; i <= data2size; i++)
 		{
+			if(((cordy / 24) == (1 / 24)))
+			{
+				mvprintw(1 % 24, data1size + 2 + i, "%c", '_');
+		
+			}
+		}
+		
+		if(((cordy / 24) == (y / 24)))
+		{
+			mvprintw(y % 24, x, "%d | %d", divisor1, number1);
+		}
+
+		y++;
+
+		int index1 = 0;
+		int bufferanswer1 = data1size + 3;
+		int theproduct1;
+		int thequotient1;
+		int theanswer1;
+
+		if(divisor1 <= thenumber1[index1])
+		{
+			buffernumber1 = thenumber1[index1];
 			index1++;
 		}
-	}
-	
-	while(index1 <= counter)
-	{
-		thequotient1 = buffernumber1 / divisor1;
-		if(number1 >= divisor1)
+		else if(number1 >= divisor1)
 		{
-			mvprintw(0, data1size+3+index1-1, "%d", thequotient1);
+			buffernumber1 = thenumber1[index1] * 10;
+			index1++;
+			buffernumber1 += thenumber1[index1];
+			index1++;
+		}
+		else if(number1 == 0)
+		{
+			buffernumber1 = 0;
 		}
 		else
 		{
-			mvprintw(0, data1size+2+data2size, "%d", thequotient1);
-		}
-		bufferanswer1++;
-		theproduct1 = thequotient1 * divisor1;
-		theanswer1 = buffernumber1 - theproduct1;
-		if(number1 >= divisor1)
-		{
-		if(thenumber1[index1] != -1)
-		{
-			if(theproduct1 < 100)
+			buffernumber1 = thenumber1[index1];
+
+			if(thenumber1[index1] <= counter)
 			{
-				mvprintw(y, data1size+2+index1-1, "%2d", theproduct1);
+				index1++;
+			}
+		}
+	
+		while(index1 <= counter)
+		{
+			thequotient1 = buffernumber1 / divisor1;
+			if(number1 >= divisor1)
+			{
+				if(((cordy / 24) == (0 / 24)))
+				{
+					mvprintw(0 % 24, data1size+3+index1-1, "%d", thequotient1);
+				}
 			}
 			else
 			{
-				mvprintw(y, data1size+2+index1-2, "%2d", theproduct1);
+				if(((cordy / 24) == (0 / 24)))
+				{
+					mvprintw(0 % 24, data1size+2+data2size, "%d", thequotient1);
+				}
 			}
-		}
-		else
-		{
-			mvprintw(y, data1size+2+index1-2, "%2d", theproduct1);
-		}
-		mvprintw(y, data1size+1, "%c", '-');
-		y++;
-		for(int i = 0; i <= data2size; i++)
-		{
-			mvprintw(y, data1size+2+i, "%c", '-');
-		}
-		y++;
-		if(thenumber1[index1] != -1)
-		{
-			mvprintw(y, data1size+2+index1-1, "%2d%d", theanswer1, thenumber1[index1]);
-		}
-		else
-		{
-			mvprintw(y, data1size+2+index1-1, "%2d", theanswer1);
-		}
-		y++;
-		buffernumber1 = theanswer1 * 10 + thenumber1[index1];
-		index1++;
-		}
-		else
-		{
-			mvprintw(y, data1size+2+data2size, "%d", theproduct1);
-			mvprintw(y, data1size+1, "%c", '-');
-			y++;
-			for(int i = 0; i <= data2size; i++)
+			bufferanswer1++;
+			theproduct1 = thequotient1 * divisor1;
+			theanswer1 = buffernumber1 - theproduct1;
+			if(number1 >= divisor1)
 			{
-				mvprintw(y, data1size+2+i, "%c", '-');
+				if(thenumber1[index1] != -1)
+				{
+					if(theproduct1 < 100)
+					{
+						if(((cordy / 24) == (y / 24)))
+						{
+							mvprintw(y % 24, data1size+2+index1-1, "%2d", theproduct1);
+						}
+					
+					}
+					else
+					{
+						if(((cordy / 24) == (y / 24)))
+						{
+							mvprintw(y % 24, data1size+2+index1-2, "%2d", theproduct1);
+						}
+					}
+				}
+				else
+				{
+					if(((cordy / 24) == (y / 24)))
+					{
+						mvprintw(y % 24, data1size+2+index1-1, "%2d", theproduct1);
+					}	
+				}
+				if(((cordy / 24) == (y / 24)))
+				{
+					mvprintw(y % 24, data1size+1, "%c", '-');
+				}
+				y++;
+				for(int i = 0; i <= data2size; i++)
+				{
+					if(((cordy / 24) == (y / 24)))
+					{
+						mvprintw(y % 24, data1size+2+i, "%c", '-');
+					}
+				}
+				y++;
+				if(thenumber1[index1] != -1)
+				{
+					if(((cordy / 24) == (y / 24)))
+					{
+						mvprintw(y % 24, data1size+2+index1-1, "%2d%d", theanswer1, thenumber1[index1]);
+					}
+				}
+				else
+				{
+					if(((cordy / 24) == (y / 24)))
+					{
+						mvprintw(y % 24, data1size+2+index1-1, "%2d", theanswer1);
+					}
+				}
+				y++;
+				buffernumber1 = theanswer1 * 10 + thenumber1[index1];
+				index1++;
 			}
-			y++;
-			mvprintw(y, data1size+3, "%d", theanswer1);
-			break;
+			else
+			{
+					if(((cordy / 24) == (y / 24)))
+					{
+						mvprintw(y % 24, data1size+2+data2size, "%d", theproduct1);
+					}
+					if(((cordy / 24) == (y / 24)))
+					{
+						mvprintw(y % 24, data1size+1, "%c", '-');
+					}
+					y++;
+					for(int i = 0; i <= data2size; i++)
+					{
+						if(((cordy / 24) == (y / 24)))
+						{
+							mvprintw(y % 24, data1size+2+i, "%c", '-');
+						}
+					}
+					y++;
+					if(((cordy / 24) == (y / 24)))
+					{
+						mvprintw(y % 24, data1size+3, "%d", theanswer1);
+					}
+					break;
+			}
 		}
-	}
+
+		if(ch == 'w')
+		{
+			cordy--;
+
+			if(cordy < 0)
+			{
+				cordy = 0;
+			}
+		}
+		else if(ch == 's')
+		{
+			cordy++;
+
+			if(cordy > height - 1)
+			{
+				cordy = height - 1;
+			}
+		}
 	
-	refresh();
-	
-	while((ch = getch()) != 'q')
-	{
+		move(cordy, cordx);
+
+		refresh();
 	}
 	
 	endwin();

@@ -9,3 +9,7 @@ $ make <br />
 <br />
 To divide 987 / 10 and see the answer and work. <br />
 $ ./divisionwithremainder1 987 10 <br />
+<br />
+Use s to move down. <br />
+Use w to move up. <br />
+
