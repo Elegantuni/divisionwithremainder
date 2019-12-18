@@ -26,8 +26,11 @@ int main(int argc, char *argv[])
 	int data1size = strlen(data1);
 	int data2size = strlen(data2);
 	int buffernumber1;
+<<<<<<< HEAD
 	int cordx = 0;
 	int cordy = 0;
+=======
+>>>>>>> 94ca08319170be131d0c893d1ab321926adc9c91
 
 	if(strlen(data1) > 8)
 	{
@@ -39,7 +42,11 @@ int main(int argc, char *argv[])
 	if(strlen(data2) > 8)
 	{
 		cout << "99999999 is the max value of number" << endl;
+<<<<<<< HEAD
 
+=======
+		
+>>>>>>> 94ca08319170be131d0c893d1ab321926adc9c91
 		return 1;
 	}
 
@@ -171,6 +178,7 @@ int main(int argc, char *argv[])
 		}
 		else
 		{
+<<<<<<< HEAD
 			if(((cordy / 24) == (y / 24)) && ((cordx / 80) == ((data1size+2+index1-1) / 80)))
 			{
 				mvprintw(y % 24, (data1size+2+index1-1) % 80, "%2d", theproduct1);
@@ -179,6 +187,9 @@ int main(int argc, char *argv[])
 		if(((cordy / 24) == (y / 24)) && ((cordx / 80) == ((data1size+1) / 80)))
 		{
 			mvprintw(y % 24, (data1size+1) % 80, "%c", '-');
+=======
+			mvprintw(y, data1size+2+index1-2, "%2d", theproduct1);
+>>>>>>> 94ca08319170be131d0c893d1ab321926adc9c91
 		}
 		y++;
 		for(int i = 0; i <= data2size; i++)
