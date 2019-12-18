@@ -25,7 +25,21 @@ int main(int argc, char *argv[])
 	int data1size = strlen(data1);
 	int data2size = strlen(data2);
 	int buffernumber1;
-	
+
+	if(strlen(data1) > 8)
+	{
+		cout << "99999999 is the max value of divisor" << endl;
+
+		return 1;
+	}
+
+	if(strlen(data2) > 8)
+	{
+		cout << "99999999 is the max value of number" << endl;
+		
+		return 1;
+	}
+
 	for(int i = 0; i < maxlength; i++)
 	{
 		thenumber1[i] = -1;
@@ -126,7 +140,7 @@ int main(int argc, char *argv[])
 		}
 		else
 		{
-			mvprintw(y, data1size+2+index1-1, "%2d", theproduct1);
+			mvprintw(y, data1size+2+index1-2, "%2d", theproduct1);
 		}
 		mvprintw(y, data1size+1, "%c", '-');
 		y++;
